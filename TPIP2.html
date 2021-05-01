@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app">
+        <template v-for="item in items">
+            <list-item v-bind:item="item" v-bind:callBackFromParent="popUp"></list-item>
+        </template>
+    </div>
+    
+</body>
+
+<script>
+    const listItemComponent = {
+        props: {
+            item: {type: Object}, 
+            callBackFromParent: {type: Function}
+            },
+        template: `
+            <div>
+                <span>{{item.text}}</span>
+                <button v-on:click"callBackFromParent()">Delete</button>
+            </div>
+        `
+    }
+    const app = Vue.createApp({
+        data() {
+            return {
+                items: [
+                    {
+                        id: 1,
+                        text: "Random text 1",
+                    },
+                    {
+                        id: 2,
+                        text: "Random text 2",
+                    },
+                    {
+                        id: 3,
+                        text: "Random text 3",
+                    },
+                    {
+                        id: 4,
+                        text: "Random text 4",
+                    },
+                    {
+                        id: 5,
+                        text: "Random text 5",
+                    },
+                    {
+                        id: 6,
+                        text: "Random text 6",
+                    },
+                    {
+                        id: 7,
+                        text: "Random text 7",
+                    },
+                    {
+                        id: 8,
+                        text: "Random text 8",
+                    },
+                    {
+                        id: 9,
+                        text: "Random text 9",
+                    },
+                    {
+                        id: 10,
+                        text: "Random text 10",
+                    },
+                ],
+            };
+        },
+        components: {
+            "list-item": listItemComponent
+        },
+        methods: {
+            popUp() {
+                alert('from parent')
+            }
+        }
+    });
+    app.mount("#app");
+</script>
+
+<style>
+    .app{
+        border: solid black 1px;
+        width: 50%;
+        display: plex;
+        padding: 30px;
+        justify-content: space-between;
+    }
+</style>
+
+
+</html>
